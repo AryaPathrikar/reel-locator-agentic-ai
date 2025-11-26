@@ -12,8 +12,3 @@ pandas
 scikit-learn
 mcp[cli]==1.22.0
 google-adk==1.19.0
-
-
-
-# Optional: Video processing (if you want real frame extraction)
-# ffmpeg-python
