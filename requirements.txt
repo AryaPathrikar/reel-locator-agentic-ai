@@ -1,0 +1,19 @@
+# Core dependencies for Reel Locator multi-agent system
+
+# Google ADK (Agent Development Kit)
+google-genai==1.52.0
+mcp==1.22.0
+opencv-python
+numpy
+pillow
+python-dotenv
+numpy
+pandas
+scikit-learn
+mcp[cli]==1.22.0
+google-adk==1.19.0
+
+
+
+# Optional: Video processing (if you want real frame extraction)
+# ffmpeg-python
