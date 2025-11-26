@@ -323,23 +323,6 @@ Here's a real example of the system processing a San Francisco travel reel and g
 
 *Complete 2-day San Francisco itinerary generated from a travel reel, including landmarks, local food recommendations, and detailed day-by-day activities*
 
----
-
-# 🎯 Value Statement
-
-Reel Locator reduces a **45–60 minute** manual task into **under 10 seconds**.
-
-It demonstrates:
-
-* Multi-agent parallelism
-
-* Loop refinement
-
-* Real API integration
-
-* Observability
-
-* MCP tool usage
 
 * A2A protocol
 
