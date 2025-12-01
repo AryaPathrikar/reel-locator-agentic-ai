@@ -360,6 +360,7 @@ Here's a real example of the system processing a San Francisco travel reel and g
 
 *Complete 2-day San Francisco itinerary generated from a travel reel, including landmarks, local food recommendations, and detailed day-by-day activities*
 
+<<<<<<< HEAD
 ## 🎥 Demo Video
 
 Watch the project in action:
@@ -385,6 +386,8 @@ It demonstrates:
 * Observability
 
 * MCP tool usage
+=======
+>>>>>>> 7cf491c761bebfed136c35a1412f6c9575729311
 
 * A2A protocol
 
