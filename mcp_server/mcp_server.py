@@ -233,7 +233,8 @@ async def plan_itinerary_from_reel(
         record_latency("itinerary_latency", get_metrics().get("itinerary_generation", 0))
 
         # Log all observability metrics
-        logger.info("OBSERVABILITY METRICS: \n", json.dumps(get_metrics(), indent=4))
+        metrics_json = json.dumps(get_metrics(), indent=4)
+        logger.info("OBSERVABILITY METRICS: \n%s", metrics_json)
 
         dashboard = format_observability_dashboard()
         

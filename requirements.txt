@@ -12,6 +12,7 @@ pandas
 scikit-learn
 mcp[cli]==1.22.0
 google-adk==1.19.0
+streamlit
 
 
 

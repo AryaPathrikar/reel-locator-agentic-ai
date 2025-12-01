@@ -135,6 +135,12 @@ Generates a:
 
 Using locality-aware LLM reasoning and Places metadata.
 
+The agent output includes:
+* **Location Summary**: Detected city, country, and region
+* **Landmarks List**: All landmarks identified from the video
+* **Detailed Itinerary**: Day-by-day plan focusing on detected landmarks
+* **Observability Dashboard**: Performance metrics and timings
+
 ---
 
 ## **5. MCP Tooling**
@@ -255,6 +261,9 @@ reel_locator/
 │   ├── obs.py              # Metrics and timing
 │   └── dashboard.py        # Metrics dashboard
 │
+├── ui/
+│   └── app.py              # Streamlit web interface
+│
 ├── data/
 │   ├── input/reel.mp4
 │   └── frames/
@@ -301,7 +310,11 @@ GOOGLE_PLACES_API_KEY=...
 
 ---
 
-# ▶️ Running the Agent (A2A Mode)
+# ▶️ Running the Agent
+
+## A2A Server Mode (Default)
+
+Start the A2A server which stays running on port 9000:
 
 ```bash
 python -m adk_agent.agent
@@ -313,6 +326,30 @@ The agent is now live at:
 http://localhost:9000
 ```
 
+## CLI Test Mode
+
+Run a one-time test and exit:
+
+```bash
+python -m adk_agent.agent --cli
+```
+
+## Streamlit UI
+
+Launch the interactive web interface:
+
+```bash
+streamlit run ui/app.py
+```
+
+The UI provides:
+- Video upload interface
+- Real-time processing status
+- Formatted itinerary display with location and landmarks summary
+- Session management
+
+The UI calls the agent directly (no A2A server required when using the UI).
+
 ---
 
 # 📊 Example Output
@@ -322,6 +359,14 @@ Here's a real example of the system processing a San Francisco travel reel and g
 ![Itinerary Output Example](assets/itinerary_output.png)
 
 *Complete 2-day San Francisco itinerary generated from a travel reel, including landmarks, local food recommendations, and detailed day-by-day activities*
+
+## 🎥 Demo Video
+
+Watch the project in action:
+
+[![Reel Locator Demo](https://img.youtube.com/vi/3aonG1f_xyY/0.jpg)](https://youtu.be/3aonG1f_xyY)
+
+[**Watch on YouTube**](https://youtu.be/3aonG1f_xyY) - Complete walkthrough showing the system analyzing a travel reel and generating a personalized itinerary.
 
 ---
 

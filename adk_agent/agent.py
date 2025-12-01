@@ -70,11 +70,42 @@ def build_root_agent(session_context: str = "") -> LlmAgent:
         "If tools error, guide the user to fix the input.\n"
         "You MUST only call MCP tools that exist.\n"
         "\n"
+        "CRITICAL OUTPUT FORMAT - YOU MUST FOLLOW THIS EXACTLY:\n"
+        "After calling plan_itinerary_from_reel, you MUST start your response with this exact format:\n"
+        "\n"
+        "Okay, I have analyzed the reel and created a 2-day itinerary for [CITY]. Here's the summary:\n"
+        "\n"
+        "• City: [CITY]\n"
+        "• Country: [COUNTRY]\n"
+        "• Region: [REGION]\n"
+        "• Landmarks: [LANDMARK1], [LANDMARK2], [LANDMARK3], ...\n"
+        "\n"
+        "Here is the detailed itinerary:\n"
+        "\n"
+        "[Then include the full itinerary_markdown from the tool response]\n"
+        "\n"
+        "MANDATORY FORMATTING RULES:\n"
+        "1. You MUST put a newline character after '• City: [value]' - do NOT continue on same line\n"
+        "2. You MUST put a newline character after '• Country: [value]' - do NOT continue on same line\n"
+        "3. You MUST put a newline character after '• Region: [value]' - do NOT continue on same line\n"
+        "4. You MUST put a newline character after '• Landmarks: [list]' - do NOT continue on same line\n"
+        "5. Each bullet point MUST end with a newline - use \\n or actual line break\n"
+        "6. NEVER put '• City:' and '• Country:' on the same line - they MUST be separate lines\n"
+        "7. The format MUST be:\n"
+        "   Line 1: • City: [value]\n"
+        "   Line 2: • Country: [value]\n"
+        "   Line 3: • Region: [value]\n"
+        "   Line 4: • Landmarks: [comma-separated list]\n"
+        "   Line 5: (blank line)\n"
+        "   Line 6: Here is the detailed itinerary:\n"
+        "\n"
+        "Extract the city, country, region, and landmarks from the tool response. "
+        "List all detected landmarks separated by commas on the same line after '• Landmarks:'. "
+        "Then include the complete itinerary_markdown exactly as returned by the tool with all formatting preserved.\n"
+        "\n"
         "IMPORTANT OUTPUT RULE:\n"
-        "Always include the `itinerary_markdown` field EXACTLY as returned by the tool. "
-        "Do NOT rewrite, summarize, reformat, or alter the markdown. "
         "Render the full content exactly as-is, including dashboards, metrics, logs, "
-        "observability output, and any additional sections.\n"
+        "observability output, and any additional sections. Preserve all line breaks and formatting.\n"
     )
 
     reel_locator_tools = McpToolset(
@@ -182,19 +213,24 @@ def start_a2a_server():
 
 
 # -----------------------------------------------------------
-# MAIN ENTRY (runs CLI AND A2A simultaneously)
+# MAIN ENTRY
 # -----------------------------------------------------------
 if __name__ == "__main__":
-
-    # 1. Start A2A server in background
-    import threading
-    threading.Thread(target=start_a2a_server, daemon=True).start()
-
-    # 2. Run CLI test prompt
-    test_prompt = (
-        "I uploaded a travel reel to data/input/reel.mp4. "
-        "Detect location and create a 2-day itinerary."
-    )
-    out = asyncio.run(run_once(test_prompt))
-    print("\n\n=== FINAL OUTPUT ===\n")
-    print(out)
+    import sys
+    
+    # Check if user wants CLI mode (with test) or just server mode
+    if len(sys.argv) > 1 and sys.argv[1] == "--cli":
+        # CLI mode: run test and exit
+        test_prompt = (
+            "I uploaded a travel reel to data/input/reel.mp4. "
+            "Detect location and create a 2-day itinerary."
+        )
+        out = asyncio.run(run_once(test_prompt))
+        print("\n\n=== FINAL OUTPUT ===\n")
+        print(out)
+    else:
+        # Default: A2A server mode (stays running)
+        print("🚀 Starting Reel Locator A2A Server...")
+        print("📡 Server will run on http://localhost:9000")
+        print("🛑 Press Ctrl+C to stop the server\n")
+        start_a2a_server()  # This blocks and keeps server running

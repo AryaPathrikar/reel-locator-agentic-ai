@@ -11,16 +11,34 @@ def format_observability_dashboard() -> str:
     lines.append("📊 **OBSERVABILITY DASHBOARD**")
     lines.append("----------------------------------")
 
-    # Timings
+    # Timings - each on its own line with double newline for explicit separation
     for key, val in timings.items():
-        lines.append(f"**{key.replace('_', ' ').title()}**: {val:.2f}s")
+        metric_name = key.replace('_', ' ').title()
+        lines.append(f"**{metric_name}**: {val:.2f}s")
 
-    # Latencies
+    if timings:
+        lines.append("")
+
+    # Latencies - each on its own line with double newline for explicit separation
     for key, val in latencies.items():
-        lines.append(f"**{key.replace('_', ' ').title()}**: {val:.2f}s")
+        metric_name = key.replace('_', ' ').title()
+        lines.append(f"**{metric_name}**: {val:.2f}s")
 
-    # Counters
+    if latencies:
+        lines.append("")
+
+    # Counters - each on its own line with double newline for explicit separation
     for key, val in counters.items():
-        lines.append(f"**{key.replace('_', ' ').title()}**: {val}")
+        metric_name = key.replace('_', ' ').title()
+        lines.append(f"**{metric_name}**: {val}")
 
-    return "\n".join(lines)
+    # Use double newlines between each metric to ensure they appear on separate lines
+    # This prevents markdown from collapsing them into a single line
+    # Join all lines, then add double newline after each metric line
+    result_parts = []
+    for i, line in enumerate(lines):
+        result_parts.append(line)
+    
+    result = "\n".join(result_parts)
+    # Add extra newline at the end
+    return result + "\n"
