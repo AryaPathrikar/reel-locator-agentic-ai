@@ -59,7 +59,7 @@ The architecture enables:
 * **Maintainability**: Clear separation of concerns makes the system easier to understand and modify
 * **Extensibility**: New agents or tools can be added without disrupting existing components
 
-![Reel Locator Multi-Agent System Architecture](assets/agents-flow.png)
+![Reel Locator Multi-Agent System Architecture](assets/flowchart.png)
 
 *Architecture diagram showing the complete multi-agent pipeline from Instagram Reel input to itinerary output*
 
@@ -193,7 +193,7 @@ Reel Locator tracks:
 
 Example readable output:
 
-![Observability Dashboard](assets/observability_output.png)
+![Observability Dashboard](assets/logs+metrics+observability.png)
 
 *Real-time metrics showing execution times, latencies, and operational counts for each pipeline stage*
 
@@ -356,11 +356,18 @@ The UI calls the agent directly (no A2A server required when using the UI).
 
 Here's a real example of the system processing a San Francisco travel reel and generating a complete 2-day itinerary:
 
-![Itinerary Output Example](assets/itinerary_output.png)
+## CLI Output
 
-*Complete 2-day San Francisco itinerary generated from a travel reel, including landmarks, local food recommendations, and detailed day-by-day activities*
+![CLI Output Example](assets/cli_output.png)
 
-<<<<<<< HEAD
+*Command-line interface output showing the complete 2-day San Francisco itinerary generated from a travel reel, including landmarks, local food recommendations, and detailed day-by-day activities*
+
+## Web UI Output
+
+![Web UI Output Example](assets/output.png)
+
+*Streamlit web interface showing the itinerary generation process with location summary, detected landmarks, and the complete 2-day itinerary displayed in a user-friendly format*
+
 ## 🎥 Demo Video
 
 Watch the project in action:
@@ -386,8 +393,6 @@ It demonstrates:
 * Observability
 
 * MCP tool usage
-=======
->>>>>>> 7cf491c761bebfed136c35a1412f6c9575729311
 
 * A2A protocol
 
