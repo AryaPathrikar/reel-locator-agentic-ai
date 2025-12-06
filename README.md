@@ -193,7 +193,7 @@ Reel Locator tracks:
 
 Example readable output:
 
-![Observability Dashboard](assets/logs+metrics+observability.png)
+![Observability Dashboard](assets/log+metrics+observability.png)
 
 *Real-time metrics showing execution times, latencies, and operational counts for each pipeline stage*
 
